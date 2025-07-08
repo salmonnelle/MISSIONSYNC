@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitator Assessment Dashboard - Mission: Sync</title>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-text">M</span>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-section="assessments">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="menu-item" data-section="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="menu-item" data-section="teams">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="menu-item" data-section="activities">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="menu-item" data-section="calendar">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <div class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-content">
+                    <h1 class="page-title">My Assessments</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-expand"></i>
+                            Expand
+                        </button>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <button class="btn btn-icon close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active">All</button>
+                    <button class="tab-btn">Remote</button>
+                    <button class="tab-btn">In Person</button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                <!-- Assessments View -->
+                <div id="assessments-view" class="view-section active">
+                    <!-- Selection Panel -->
+                    <div class="selection-panel">
+                        <div class="form-group">
+                            <label for="team-select" class="form-label">Team</label>
+                            <select class="form-select" id="team-select" required>
+                                <option value="">Select Team</option>
+                                <option value="alpha">Team Alpha</option>
+                                <option value="beta">Team Beta</option>
+                                <option value="gamma">Team Gamma</option>
+                                <option value="delta">Team Delta</option>
+                                <option value="epsilon">Team Epsilon</option>
+                                <option value="zeta">Team Zeta</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="activity-select" class="form-label">Activity</label>
+                            <select class="form-select" id="activity-select" required>
+                                <option value="">Select Activity</option>
+                                <option value="crash-landing">Crash Landing</option>
+                                <option value="lunar-logistics">Lunar Logistics</option>
+                                <option value="final-mission">Final Mission</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <!-- Assessment Cards -->
+                <div class="assessment-section">
+                    <div class="section-header">
+                        <h3>TODO <span class="count">3</span></h3>
+                    </div>
+                    <div class="assessment-cards">
+                        <div class="assessment-card" data-assessment="communication">
+                            <div class="card-header">
+                                <h4>Communication Assessment</h4>
+                                <span class="priority-badge high">High Priority</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="assessment-time">12:45:00</span>
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-star"></i>
+                                    <span id="communication-rating">0</span>
+                                </span>
+                            </div>
+                            <div class="star-rating" data-dimension="communication">
+                                <i class="fas fa-star star" data-rating="1"></i>
+                                <i class="fas fa-star star" data-rating="2"></i>
+                                <i class="fas fa-star star" data-rating="3"></i>
+                                <i class="fas fa-star star" data-rating="4"></i>
+                                <i class="fas fa-star star" data-rating="5"></i>
+                            </div>
+                        </div>
+
+                        <div class="assessment-card" data-assessment="collaboration">
+                            <div class="card-header">
+                                <h4>Collaboration Assessment</h4>
+                                <span class="priority-badge medium">Medium Priority</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>12:30:00</span>
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-star"></i>
+                                    <span id="collaboration-rating">0</span>
+                                </span>
+                            </div>
+                            <div class="star-rating" data-dimension="collaboration">
+                                <i class="fas fa-star star" data-rating="1"></i>
+                                <i class="fas fa-star star" data-rating="2"></i>
+                                <i class="fas fa-star star" data-rating="3"></i>
+                                <i class="fas fa-star star" data-rating="4"></i>
+                                <i class="fas fa-star star" data-rating="5"></i>
+                            </div>
+                        </div>
+
+                        <div class="assessment-card" data-assessment="leadership">
+                            <div class="card-header">
+                                <h4>Leadership Assessment</h4>
+                                <span class="priority-badge high">High Priority</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>12:15:00</span>
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-star"></i>
+                                    <span id="leadership-rating">0</span>
+                                </span>
+                            </div>
+                            <div class="star-rating" data-dimension="leadership">
+                                <i class="fas fa-star star" data-rating="1"></i>
+                                <i class="fas fa-star star" data-rating="2"></i>
+                                <i class="fas fa-star star" data-rating="3"></i>
+                                <i class="fas fa-star star" data-rating="4"></i>
+                                <i class="fas fa-star star" data-rating="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- In Progress Section -->
+                <div class="assessment-section">
+                    <div class="section-header">
+                        <h3>IN PROGRESS <span class="count">2</span></h3>
+                    </div>
+                    <div class="assessment-cards">
+                        <div class="assessment-card" data-assessment="problem-solving">
+                            <div class="card-header">
+                                <h4>Problem Solving Assessment</h4>
+                                <span class="priority-badge high">High Priority</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>12:00:00</span>
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-star"></i>
+                                    <span id="problem-solving-rating">0</span>
+                                </span>
+                            </div>
+                            <div class="star-rating" data-dimension="problem-solving">
+                                <i class="fas fa-star star" data-rating="1"></i>
+                                <i class="fas fa-star star" data-rating="2"></i>
+                                <i class="fas fa-star star" data-rating="3"></i>
+                                <i class="fas fa-star star" data-rating="4"></i>
+                                <i class="fas fa-star star" data-rating="5"></i>
+                            </div>
+                        </div>
+
+                        <div class="assessment-card" data-assessment="adaptability">
+                            <div class="card-header">
+                                <h4>Adaptability Assessment</h4>
+                                <span class="priority-badge low">Low Priority</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>11:45:00</span>
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-star"></i>
+                                    <span id="adaptability-rating">0</span>
+                                </span>
+                            </div>
+                            <div class="star-rating" data-dimension="adaptability">
+                                <i class="fas fa-star star" data-rating="1"></i>
+                                <i class="fas fa-star star" data-rating="2"></i>
+                                <i class="fas fa-star star" data-rating="3"></i>
+                                <i class="fas fa-star star" data-rating="4"></i>
+                                <i class="fas fa-star star" data-rating="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Section -->
+                <div class="assessment-section">
+                    <div class="section-header">
+                        <h3>COMPLETED <span class="count">1</span></h3>
+                    </div>
+                    <div class="assessment-cards">
+                        <div class="assessment-card completed">
+                            <div class="card-header">
+                                <h4>Session Overview</h4>
+                            </div>
+                            <div class="card-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    Completed
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics View -->
+                <div id="analytics-view" class="view-section">
+                    <div class="analytics-dashboard">
+                        <div class="analytics-header">
+                            <h2>Assessment Analytics</h2>
+                            <p>Performance insights and trends across all assessments</p>
+                        </div>
+                        
+                        <div class="analytics-cards">
+                            <div class="analytics-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Average Ratings</h3>
+                                    <div class="metric-value" id="avg-rating">4.2</div>
+                                    <div class="metric-change positive">+0.3 from last session</div>
+                                </div>
+                            </div>
+                            
+                            <div class="analytics-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Teams Assessed</h3>
+                                    <div class="metric-value" id="teams-assessed">6</div>
+                                    <div class="metric-change neutral">All teams covered</div>
+                                </div>
+                            </div>
+                            
+                            <div class="analytics-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Session Duration</h3>
+                                    <div class="metric-value" id="session-duration">2h 45m</div>
+                                    <div class="metric-change positive">Efficient timing</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dimension-breakdown">
+                            <h3>Performance by Dimension</h3>
+                            <div class="dimension-chart">
+                                <div class="dimension-bar">
+                                    <span class="dimension-name">Communication</span>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 85%"></div>
+                                        <span class="bar-value">4.2</span>
+                                    </div>
+                                </div>
+                                <div class="dimension-bar">
+                                    <span class="dimension-name">Collaboration</span>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 78%"></div>
+                                        <span class="bar-value">3.9</span>
+                                    </div>
+                                </div>
+                                <div class="dimension-bar">
+                                    <span class="dimension-name">Leadership</span>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 92%"></div>
+                                        <span class="bar-value">4.6</span>
+                                    </div>
+                                </div>
+                                <div class="dimension-bar">
+                                    <span class="dimension-name">Problem Solving</span>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 88%"></div>
+                                        <span class="bar-value">4.4</span>
+                                    </div>
+                                </div>
+                                <div class="dimension-bar">
+                                    <span class="dimension-name">Adaptability</span>
+                                    <div class="bar-container">
+                                        <div class="bar-fill" style="width: 75%"></div>
+                                        <span class="bar-value">3.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teams View -->
+                <div id="teams-view" class="view-section">
+                    <div class="teams-overview">
+                        <div class="teams-header">
+                            <h2>Team Overview</h2>
+                            <p>Manage and view detailed information about all teams</p>
+                        </div>
+                        
+                        <div class="teams-grid">
+                            <div class="team-card" data-team="alpha">
+                                <div class="team-header">
+                                    <h3>Team Alpha</h3>
+                                    <span class="team-status active">Active</span>
+                                </div>
+                                <div class="team-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Members</span>
+                                        <span class="stat-value">5</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Avg Rating</span>
+                                        <span class="stat-value">4.3</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Activities</span>
+                                        <span class="stat-value">3/3</span>
+                                    </div>
+                                </div>
+                                <div class="team-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">Complete</span>
+                                </div>
+                            </div>
+
+                            <div class="team-card" data-team="beta">
+                                <div class="team-header">
+                                    <h3>Team Beta</h3>
+                                    <span class="team-status active">Active</span>
+                                </div>
+                                <div class="team-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Members</span>
+                                        <span class="stat-value">4</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Avg Rating</span>
+                                        <span class="stat-value">4.1</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Activities</span>
+                                        <span class="stat-value">2/3</span>
+                                    </div>
+                                </div>
+                                <div class="team-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 67%"></div>
+                                    </div>
+                                    <span class="progress-text">In Progress</span>
+                                </div>
+                            </div>
+
+                            <div class="team-card" data-team="gamma">
+                                <div class="team-header">
+                                    <h3>Team Gamma</h3>
+                                    <span class="team-status active">Active</span>
+                                </div>
+                                <div class="team-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Members</span>
+                                        <span class="stat-value">5</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Avg Rating</span>
+                                        <span class="stat-value">4.5</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Activities</span>
+                                        <span class="stat-value">3/3</span>
+                                    </div>
+                                </div>
+                                <div class="team-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">Complete</span>
+                                </div>
+                            </div>
+
+                            <div class="team-card" data-team="delta">
+                                <div class="team-header">
+                                    <h3>Team Delta</h3>
+                                    <span class="team-status pending">Pending</span>
+                                </div>
+                                <div class="team-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Members</span>
+                                        <span class="stat-value">4</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Avg Rating</span>
+                                        <span class="stat-value">-</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Activities</span>
+                                        <span class="stat-value">0/3</span>
+                                    </div>
+                                </div>
+                                <div class="team-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                    <span class="progress-text">Not Started</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activities View -->
+                <div id="activities-view" class="view-section">
+                    <div class="activities-overview">
+                        <div class="activities-header">
+                            <h2>Workshop Activities</h2>
+                            <p>Manage and track progress across all Mission: Sync activities</p>
+                        </div>
+                        
+                        <div class="activities-list">
+                            <div class="activity-card">
+                                <div class="activity-header">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-plane-departure"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h3>Crash Landing</h3>
+                                        <p>Emergency response and team coordination simulation</p>
+                                    </div>
+                                    <div class="activity-status completed">Completed</div>
+                                </div>
+                                <div class="activity-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Teams Participated</span>
+                                        <span class="metric-value">6/6</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Average Duration</span>
+                                        <span class="metric-value">45 min</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Success Rate</span>
+                                        <span class="metric-value">83%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-header">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h3>Lunar Logistics</h3>
+                                        <p>Resource management and strategic planning challenge</p>
+                                    </div>
+                                    <div class="activity-status in-progress">In Progress</div>
+                                </div>
+                                <div class="activity-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Teams Participated</span>
+                                        <span class="metric-value">4/6</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Average Duration</span>
+                                        <span class="metric-value">52 min</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Success Rate</span>
+                                        <span class="metric-value">75%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="activity-card">
+                                <div class="activity-header">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-flag-checkered"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h3>Final Mission</h3>
+                                        <p>Comprehensive leadership and problem-solving finale</p>
+                                    </div>
+                                    <div class="activity-status pending">Pending</div>
+                                </div>
+                                <div class="activity-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Teams Participated</span>
+                                        <span class="metric-value">0/6</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Estimated Duration</span>
+                                        <span class="metric-value">60 min</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Target Success Rate</span>
+                                        <span class="metric-value">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div id="calendar-view" class="view-section">
+                    <div class="calendar-overview">
+                        <div class="calendar-header">
+                            <h2>Session Calendar</h2>
+                            <p>Schedule and track assessment sessions</p>
+                        </div>
+                        
+                        <div class="calendar-controls">
+                            <button class="btn btn-outline" id="prev-week">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous Week
+                            </button>
+                            <h3 id="current-week">July 8-14, 2025</h3>
+                            <button class="btn btn-outline" id="next-week">
+                                Next Week
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="calendar-grid">
+                            <div class="calendar-day">
+                                <div class="day-header">
+                                    <span class="day-name">Monday</span>
+                                    <span class="day-date">July 8</span>
+                                </div>
+                                <div class="day-events">
+                                    <div class="event current">
+                                        <span class="event-time">10:00 AM</span>
+                                        <span class="event-title">Team Alpha - Crash Landing</span>
+                                        <span class="event-status completed">Completed</span>
+                                    </div>
+                                    <div class="event current">
+                                        <span class="event-time">2:00 PM</span>
+                                        <span class="event-title">Team Beta - Lunar Logistics</span>
+                                        <span class="event-status in-progress">In Progress</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calendar-day">
+                                <div class="day-header">
+                                    <span class="day-name">Tuesday</span>
+                                    <span class="day-date">July 9</span>
+                                </div>
+                                <div class="day-events">
+                                    <div class="event">
+                                        <span class="event-time">9:00 AM</span>
+                                        <span class="event-title">Team Gamma - Final Mission</span>
+                                        <span class="event-status pending">Scheduled</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calendar-day">
+                                <div class="day-header">
+                                    <span class="day-name">Wednesday</span>
+                                    <span class="day-date">July 10</span>
+                                </div>
+                                <div class="day-events">
+                                    <div class="event">
+                                        <span class="event-time">11:00 AM</span>
+                                        <span class="event-title">Team Delta - Crash Landing</span>
+                                        <span class="event-status pending">Scheduled</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings View -->
+                <div id="settings-view" class="view-section">
+                    <div class="settings-overview">
+                        <div class="settings-header">
+                            <h2>Dashboard Settings</h2>
+                            <p>Customize your assessment dashboard experience</p>
+                        </div>
+                        
+                        <div class="settings-sections">
+                            <div class="settings-section">
+                                <h3>Assessment Configuration</h3>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <span>Auto-save assessments</span>
+                                        <input type="checkbox" id="auto-save" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <span>Show confirmation dialogs</span>
+                                        <input type="checkbox" id="confirm-dialogs" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <span>Enable keyboard shortcuts</span>
+                                        <input type="checkbox" id="keyboard-shortcuts" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Export Settings</h3>
+                                <div class="setting-item">
+                                    <label for="export-format" class="form-label">Default Export Format</label>
+                                    <select class="form-select" id="export-format">
+                                        <option value="json">JSON</option>
+                                        <option value="csv">CSV</option>
+                                        <option value="xlsx">Excel</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="setting-label">
+                                        <span>Include timestamps in exports</span>
+                                        <input type="checkbox" id="include-timestamps" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3>Data Management</h3>
+                                <div class="setting-item">
+                                    <button class="btn btn-outline" id="export-all-data">
+                                        <i class="fas fa-download"></i>
+                                        Export All Data
+                                    </button>
+                                </div>
+                                <div class="setting-item">
+                                    <button class="btn btn-outline" id="clear-local-data">
+                                        <i class="fas fa-trash"></i>
+                                        Clear Local Data
+                                    </button>
+                                </div>
+                                <div class="setting-item">
+                                    <button class="btn btn-primary" id="save-settings">
+                                        <i class="fas fa-save"></i>
+                                        Save Settings
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Detail Panel -->
+        <aside class="detail-panel">
+            <div class="detail-header">
+                <div class="detail-title">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Assessment Details</span>
+                </div>
+                <div class="detail-meta">
+                    <span class="priority-badge high">High Priority</span>
+                    <span class="detail-date">
+                        <i class="fas fa-calendar"></i>
+                        <span id="current-date">Jul 10 - 14</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <div class="time-tracker">
+                    <div class="time-circle">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="time-info">
+                        <span>Time Spent on this project</span>
+                        <strong id="session-time">12:45:00</strong>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Current Selection</h4>
+                    <div class="selection-display">
+                        <div class="selection-item">
+                            <strong>Team:</strong> <span id="current-team">No team selected</span>
+                        </div>
+                        <div class="selection-item">
+                            <strong>Activity:</strong> <span id="current-activity">No activity selected</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Notes</h4>
+                    <textarea class="notes-textarea" id="notes" placeholder="Enter detailed observations about team performance, specific behaviors, interactions, and notable incidents..."></textarea>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Comments</h4>
+                    <div class="comments-section">
+                        <div class="comment">
+                            <div class="comment-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <strong>Facilitator</strong>
+                                    <span class="comment-time">Just Now</span>
+                                </div>
+                                <p>Assessment in progress. Monitoring team dynamics.</p>
+                            </div>
+                        </div>
+                        <div class="comment-input">
+                            <input type="text" placeholder="Add a comment..." />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-actions">
+                    <button class="btn btn-secondary" id="reset-btn">
+                        <i class="fas fa-undo"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" id="save-btn">
+                        <i class="fas fa-save"></i>
+                        Save Assessment
+                    </button>
+                    <button class="btn btn-success" id="export-btn">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container">
+        <div id="toast" class="toast" role="alert">
+            <div class="toast-content">
+                <i class="fas fa-check-circle"></i>
+                <span id="toast-message">Assessment saved successfully!</span>
+            </div>
+            <button class="toast-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
