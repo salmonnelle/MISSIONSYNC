@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 
 # Create the app
 app = Flask(__name__)
@@ -9,6 +9,19 @@ app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key")
 def index():
     """Main dashboard route"""
     return render_template('index.html')
+
+# Explicitly serve static files (helps with Vercel deployment)
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return send_from_directory('static', path)
+
+# Serve favicon if requested
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+# This is needed for Vercel deployment
+app_instance = app
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
